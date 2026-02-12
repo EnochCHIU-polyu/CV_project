@@ -37,6 +37,60 @@
 
 </div>
 
+## 🛠️ Environment Setup & VS Code Configuration
+
+### 1. Installation (conda)
+
+Follow the [official installation guide](https://mmpose.readthedocs.io/en/latest/installation.html) for detailed instructions.
+
+**Step 0. Install Miniconda**
+Download and install Miniconda from the [official website](https://docs.conda.io/en/latest/miniconda.html).
+
+**Step 1. Create and activate a conda environment**
+
+```bash
+conda create --name openmmlab python=3.8 -y
+conda activate openmmlab
+```
+
+**Step 2. Install PyTorch**
+Follow the [official PyTorch instructions](https://pytorch.org/get-started/locally/) for your specific hardware.
+_Example for CPU (macOS/Linux):_
+
+```bash
+conda install pytorch torchvision cpuonly -c pytorch
+```
+
+**Step 3. Install MMEngine, MMCV, and MMDetection**
+
+```bash
+pip install -U openmim
+mim install mmengine
+mim install "mmcv>=2.0.1"
+mim install "mmdet>=3.1.0"
+```
+
+**Step 4. Install MMPose from source**
+
+```bash
+git clone https://github.com/open-mmlab/mmpose.git
+cd mmpose
+pip install -r requirements.txt
+pip install -v -e .
+```
+
+### 2. VS Code Setup
+
+To configure Visual Studio Code to use this environment:
+
+1. Open this project folder in VS Code.
+2. Install the **Python** extension (by Microsoft) if not already installed.
+3. Open the **Command Palette** with `Cmd+Shift+P` (macOS) or `Ctrl+Shift+P` (Windows/Linux).
+4. Type and select: `Python: Select Interpreter`.
+5. Choose the **openmmlab** conda environment from the list.
+   - It usually looks like `~/miniconda3/envs/openmmlab/bin/python`.
+6. Any new terminal you open in VS Code will now automatically activate this environment.
+
 <div align="center">
   <a href="https://openmmlab.medium.com/" style="text-decoration:none;">
     <img src="https://user-images.githubusercontent.com/25839884/219255827-67c1a27f-f8c5-46a9-811d-5e57448c61d1.png" width="3%" alt="" /></a>
@@ -109,11 +163,9 @@ https://user-images.githubusercontent.com/15977946/124654387-0fd3c500-ded1-11eb-
 - Support inference of [PoseAnything](/projects/pose_anything). Web demo is available [here](https://openxlab.org.cn/apps/detail/orhir/Pose-Anything).
 
 - Support for new datasets:
-
   - (ICCV 2015) [300VW](/docs/en/dataset_zoo/2d_face_keypoint.md)
 
-- Welcome to use the [*MMPose project*](/projects/README.md). Here, you can discover the latest features and algorithms in MMPose and quickly share your ideas and code implementations with the community. Adding new features to MMPose has become smoother:
-
+- Welcome to use the [_MMPose project_](/projects/README.md). Here, you can discover the latest features and algorithms in MMPose and quickly share your ideas and code implementations with the community. Adding new features to MMPose has become smoother:
   - Provides a simple and fast way to add new algorithms, features, and applications to MMPose.
   - More flexible code structure and style, fewer restrictions, and a shorter code review process.
   - Utilize the powerful capabilities of MMPose in the form of independent projects without being constrained by the code framework.
@@ -132,7 +184,6 @@ https://user-images.githubusercontent.com/15977946/124654387-0fd3c500-ded1-11eb-
 <br/>
 
 - January 4, 2024: MMPose [v1.3.0](https://github.com/open-mmlab/mmpose/releases/tag/v1.3.0) has been officially released, with major updates including:
-
   - Support for new datasets: ExLPose, H3WB
   - Release of new RTMPose series models: RTMO, RTMW
   - Support for new algorithm PoseAnything
@@ -155,7 +206,6 @@ Please refer to [installation.md](https://mmpose.readthedocs.io/en/latest/instal
 We provided a series of tutorials about the basic usage of MMPose for new users:
 
 1. For the basic usage of MMPose:
-
    - [A 20-minute Tour to MMPose](https://mmpose.readthedocs.io/en/latest/guide_to_framework.html)
    - [Demos](https://mmpose.readthedocs.io/en/latest/demos.html)
    - [Inference](https://mmpose.readthedocs.io/en/latest/user_guides/inference.html)
@@ -167,7 +217,6 @@ We provided a series of tutorials about the basic usage of MMPose for new users:
    - [Dataset Annotation and Preprocessing](https://mmpose.readthedocs.io/en/latest/user_guides/dataset_tools.html)
 
 2. For developers who wish to develop based on MMPose:
-
    - [Learn about Codecs](https://mmpose.readthedocs.io/en/latest/advanced_guides/codecs.html)
    - [Dataflow in MMPose](https://mmpose.readthedocs.io/en/latest/advanced_guides/dataflow.html)
    - [Implement New Models](https://mmpose.readthedocs.io/en/latest/advanced_guides/implement_new_models.html)
@@ -181,11 +230,9 @@ We provided a series of tutorials about the basic usage of MMPose for new users:
    - [Migration Guide](https://mmpose.readthedocs.io/en/latest/migration.html)
 
 3. For researchers and developers who are willing to contribute to MMPose:
-
    - [Contribution Guide](https://mmpose.readthedocs.io/en/latest/contribution_guide.html)
 
 4. For some common issues, we provide a FAQ list:
-
    - [FAQ](https://mmpose.readthedocs.io/en/latest/faq.html)
 
 ## Model Zoo
