@@ -25,6 +25,8 @@ conda create -n cv_project python=3.8 -y
 conda activate cv_project
 ```
 
+> **Note:** If you are running this in VS Code, please make sure to select the correct Python interpreter pointing to your `cv_project` conda environment. You can do this by opening the Command Palette (`Cmd+Shift+P` or `Ctrl+Shift+P`) and searching for `Python: Select Interpreter`.
+
 ### 3. Install PyTorch
 
 Install PyTorch compatible with your system (MacOS/CPU):
@@ -35,16 +37,26 @@ pip install torch torchvision
 
 ### 4. Install MMPose (Hand Detection)
 
-Install the requirements and the library from the local `handDetection` folder:
+On macOS (especially Apple Silicon M1/M2), you need to install build dependencies manually and ensure compatible OpenMMLab versions.
 
 ```bash
+# 1. Install build dependencies for xtcocotools
+pip install cython numpy
+
+# 2. Install xtcocotools (using --no-build-isolation to use installed dependencies)
+pip install xtcocotools --no-build-isolation
+
+# 3. Install OpenMMLab dependencies
+# We use specific versions to avoid compatibility issues between mmdet and mmpose
+pip install -U openmim
+mim install mmengine "mmcv==2.1.0" "mmdet==3.2.0"
+
+# 4. Install the local handDetection package
 cd handDetection
 pip install -r requirements.txt
 pip install -e .
 cd ..
 ```
-
-_Note: You may also need `mmengine` and `mmcv`. If prompted, install them via `pip install -U openmim && mim install mmengine mmcv`._
 
 ### 5. Install Ultralytics (YOLO)
 
