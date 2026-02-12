@@ -69,8 +69,40 @@ cd ros
 python run_project_demo.py
 ```
 
-### Features
+## Developer Guide
 
-- **Mirror Effect**: The webcam feed is mirrored for more natural interaction.
-- **Hand Guidance**: The system detects your hand and a target object (e.g., a cup) and calculates a guidance vector.
-- **Mock ROS**: Uses a lightweight shim to simulate ROS 2 nodes, publishers, and subscribers.
+### 1. How to Modify the Target Object
+
+The system is currently configured to look for a **"cup"**. To change this:
+
+1. Open [`ros/run_project_demo.py`](ros/run_project_demo.py).
+2. Look for the variable `target_class` (around line 58).
+   ```python
+   target_class = "cup"  # Change "cup" to "bottle", "cell phone", etc.
+   ```
+   _Note: The object name must match a class label from the COCO dataset (used by YOLO)._
+
+### 2. How to Access Guidance Output (Left/Right)
+
+The system calculates the relative position of the hand to the object to provide guidance (e.g., "Left", "Right").
+You can find and modify this logic in [`ros/run_project_demo.py`](ros/run_project_demo.py):
+
+- **Location**: Inside the main loop, under `# --- GUIDANCE LOGIC ---`.
+- **Key Variables**:
+  - `dx`, `dy`: Distances between the hand and the target.
+  - `msg`: The guidance string (e.g., "Left", "Up").
+- **Customization**:
+  To send this output to another system or print it to the terminal, you can add code here:
+  ```python
+  if msg:
+      print(f"Instruction: {msg}")  # Or publish to a ROS topic
+  ```
+
+### 3. Where to Find the Code
+
+- **Main Controller**: [`ros/run_project_demo.py`](ros/run_project_demo.py)
+  - Handles the webcam, synchronization, and high-level logic.
+- **Object Detection**: [`ros/src/cv_control/cv_control/yolo_node.py`](ros/src/cv_control/cv_control/yolo_node.py)
+  - Wraps the YOLO model and outputs bounding boxes.
+- **Hand Pose**: [`ros/src/cv_control/cv_control/hand_node.py`](ros/src/cv_control/cv_control/hand_node.py)
+  - Wraps MMPose and returns keypoints given an image and a bounding box.
